@@ -53,33 +53,40 @@ public class CommandOptions
         return value;
     }
     
-    public void parseOptions(){
+    public void parseOptions() {
 
-        try{
+        try {
 
             dynamicPFile = valueOf("df");
             staticPFile = valueOf("sf");
+            
+            System.out.println(valueOf("sf"));
 
-            if (hasOption("M")){
+            if (hasOption("M")) {
                 MSize = Integer.parseInt(valueOf("M"));
+                System.out.println(valueOf("M"));
             }
             
-            if (hasOption("rc")){
+            if (hasOption("rc")) {
                 interactionRadius = Double.parseDouble(valueOf("rc"));
             }
             
-            if (hasOption("pc")){
+            if (hasOption("pc")) {
                 periodicContour = true;
             }
 
-            if(hasOption("bf")){
+            if(hasOption("bf")) {
                 bruteForce = true;
             }
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Command is not valid.");
         }
+    }
+    
+    public String getStaticFile() {
+    	return this.staticPFile;
     }
     
 }
