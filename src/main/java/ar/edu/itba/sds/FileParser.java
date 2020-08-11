@@ -1,24 +1,27 @@
 package main.java.ar.edu.itba.sds;
 
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class FileParser {
 
 	private static int particleCount;
 	private static int lengthSize;
+//	private static List<Particle> particles = new LinkedList<Particle>();
 
 
-    static void parseStatic(String staticFilePath) throws FileNotFoundException {
+    public static void parseStatic(String staticFilePath) throws FileNotFoundException {
         FileInputStream fis = new FileInputStream(staticFilePath);  
         Scanner sc = new Scanner(fis);
         particleCount = sc.nextInt();
-        lengthSize = sc.nextDouble();
+        lengthSize = sc.nextInt();
         for (int i = 0; i < particleCount; i++){
 
         }

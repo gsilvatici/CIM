@@ -15,6 +15,10 @@ public class MainApp {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}
+	    
+	    
+	    CellIndexMethod cim = new CellIndexMethod(cmd.getM(), cmd.getL(), cmd.getRc());
+	    cim.compute();
 	
 	}
 }
