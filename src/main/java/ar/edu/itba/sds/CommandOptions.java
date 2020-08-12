@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class CommandOptions
 {
     private int MSize;
-    private double interactionRadius;
-    private boolean periodicContour = false;
+    private float rc;
+    private boolean pc = false;
     private boolean bruteForce = false;
     private String staticPFile;
     private String dynamicPFile;
@@ -59,20 +59,24 @@ public class CommandOptions
 
             dynamicPFile = valueOf("df");
             staticPFile = valueOf("sf");
-            
-            System.out.println(valueOf("sf"));
-
+       
             if (hasOption("M")) {
                 MSize = Integer.parseInt(valueOf("M"));
                 System.out.println(valueOf("M"));
+            } else {
+            	MSize = 1;
             }
             
             if (hasOption("rc")) {
-                interactionRadius = Double.parseDouble(valueOf("rc"));
+            	rc = Float.parseFloat(valueOf("rc"));
+            } else {
+            	rc = 1;
             }
             
             if (hasOption("pc")) {
-                periodicContour = true;
+            	pc = true;
+            } else {
+            	pc = false;
             }
 
             if(hasOption("bf")) {
@@ -88,5 +92,22 @@ public class CommandOptions
     public String getStaticFile() {
     	return this.staticPFile;
     }
+    
+    public String getDinamycFile() {
+    	return this.dynamicPFile;
+    }
+
+	public int getM() {
+		return this.MSize;
+	}
+
+	public float getRc() {
+		// TODO Auto-generated method stub
+		return this.rc;
+	}
+
+	public boolean getPc() {
+		return this.pc;
+	}
     
 }
