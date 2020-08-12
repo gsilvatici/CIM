@@ -64,7 +64,7 @@ public class CommandOptions
                 MSize = Integer.parseInt(valueOf("M"));
                 System.out.println(valueOf("M"));
             } else {
-            	MSize = 1;
+            	MSize = 10;
             }
             
             if (hasOption("rc")) {

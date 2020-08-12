@@ -26,7 +26,7 @@ public class CellIndexMethod {
     	
         /* builds heads lists */
     	List<Particle>[][] heads = new LinkedList[M][M]; 
-
+    	
         for (int i = 0; i < M ; i++) {
             for (int j = 0; j < M ; j++) {
                 heads[i][j] = new LinkedList<Particle>();
@@ -47,19 +47,19 @@ public class CellIndexMethod {
 	            for (Particle p : heads[i][j]){
 	                int xCell = p.getXIndex();
 	                int yCell = p.getYIndex();
-	
-	                checkNeighbourCell(p, xCell, yCell);
-	                checkNeighbourCell(p, xCell + 1, yCell);
-	                checkNeighbourCell(p, xCell + 1, yCell + 1);
-	                checkNeighbourCell(p, xCell, yCell + 1);
-	                checkNeighbourCell(p, xCell + 1, yCell - 1);
+	                
+	                checkNeighbourCell(p, heads[xCell][yCell], xCell, yCell);
+	                checkNeighbourCell(p, heads[xCell][yCell], xCell + 1, yCell);
+	                checkNeighbourCell(p, heads[xCell][yCell], xCell + 1, yCell + 1);
+	                checkNeighbourCell(p, heads[xCell][yCell], xCell, yCell + 1);
+	                checkNeighbourCell(p, heads[xCell][yCell], xCell + 1, yCell - 1);
 	            }     		                
             }
         }
     }
     
     
-    private void checkNeighbourCell(Particle particle, int xCell, int yCell) {
+    private void checkNeighbourCell(Particle particle, List<Particle> neighbours, int xCell, int yCell) {
 
         if (pc) {
         	if (xCell >= M){
@@ -78,9 +78,10 @@ public class CellIndexMethod {
             if (xCell >= M || xCell < 0 || yCell >= M || yCell < 0) {
                 return;
             }
-        }
+        }        
 
-        for (Particle neighbourCellParticle : heads[xCell][yCell]) {
+        for (Particle neighbourCellParticle : neighbours) {
+//        for (Particle neighbourCellParticle : heads[xCell][yCell]) {
 
             if (!neighbourCellParticle.equals(particle)) {
 

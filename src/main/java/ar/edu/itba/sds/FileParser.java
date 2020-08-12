@@ -23,8 +23,6 @@ public class FileParser {
 	
     public List<Particle> getParticles(String staticFilePath, String dynamicFilePath) throws FileNotFoundException {
         
-//    	parseStaticFile(staticFilePath);
-//    	parseDynamicFile(dynamicFilePath);
 
     	// parse static file
     	FileInputStream fis = new FileInputStream(staticFilePath);  
@@ -36,25 +34,20 @@ public class FileParser {
             float property = sc.nextFloat();
             particles.add(new Particle(i, radius, property));
         }    
-        sc.close();
         
         // parse dynamic file
         System.out.println(dynamicFilePath);
-//        File dynamicFile = new File(dynamicFilePath);
         fis = new FileInputStream(dynamicFilePath);  
-        Scanner sc2 = new Scanner(fis);
-        sc2.nextInt();
-//        System.out.println(sc.nextLine());
-//        System.out.println(sc.nextLine());
-//        System.out.println(sc.nextLine());
+        sc = new Scanner(fis);
+        sc.nextInt();
         for (int i = 0; i < particleCount; i++) {
-            double x = sc2.nextDouble();
-            float y = sc2.nextFloat();
-            float vx = sc2.nextFloat(); 
-            float vy = sc2.nextFloat(); 
+        	double x = sc.nextDouble();
+        	double y = sc.nextDouble();
+//        	double vx = sc.nextDouble(); 
+//        	double vy = sc.nextDouble(); 
             Particle particle = particles.getFirst();
 //            particle.setX(x);
-            particle.setY(y);
+//            particle.setY(y);
             particles.add(particle);
         } 	
     	
@@ -62,44 +55,7 @@ public class FileParser {
 		return particles;
        
 	}
-    
-    public void parseStaticFile(String staticFilePath) throws FileNotFoundException {
-    	// parse static file
-    	FileInputStream fis = new FileInputStream(staticFilePath);  
-        Scanner sc = new Scanner(fis);
-        particleCount = sc.nextInt();
-        lengthSize = sc.nextInt();
-        for (int i = 0; i < particleCount; i++) {
-            float radius   = sc.nextFloat();
-            float property = sc.nextFloat();
-            particles.add(new Particle(i, radius, property));
-        }    	
-    	
-    }
 
-    public void parseDynamicFile(String dynamicFilePath) throws FileNotFoundException {
-        // parse dynamic file
-        System.out.println(dynamicFilePath);
-//        File dynamicFile = new File(dynamicFilePath);
-        FileInputStream fis = new FileInputStream(dynamicFilePath);  
-        Scanner sc = new Scanner(fis);
-        sc.nextInt();
-//        System.out.println(sc.nextLine());
-//        System.out.println(sc.nextLine());
-//        System.out.println(sc.nextLine());
-        for (int i = 0; i < particleCount; i++) {
-            double x = sc.nextDouble();
-            float y = sc.nextFloat();
-            float vx = sc.nextFloat(); 
-            float vy = sc.nextFloat(); 
-            Particle particle = particles.getFirst();
-//            particle.setX(x);
-            particle.setY(y);
-            particles.add(particle);
-        } 	
-        sc.close();
-    	
-    }
 	public int getL() {
 		return lengthSize;
 	}

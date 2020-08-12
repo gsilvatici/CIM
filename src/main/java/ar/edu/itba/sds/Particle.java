@@ -1,8 +1,8 @@
 package main.java.ar.edu.itba.sds;
 
-import java.util.TreeSet;
-
-public class Particle {
+import java.util.HashSet;
+import java.util.Set;
+public class Particle implements Comparable<Particle> {
 	
     private float x;
     private float y;
@@ -12,7 +12,7 @@ public class Particle {
     private int xIndex;
     private int yIndex;
 	private int id;
-	private TreeSet<Particle> neighbours;
+	private Set<Particle> neighbours;
 
     public Particle(int id, float x, float y, float radius, float property) {
         this.x = x;
@@ -25,7 +25,7 @@ public class Particle {
         this.id = id;
         this.radius = radius;
         this.property = property;
-        this.neighbours = new TreeSet<>();
+        this.neighbours = new HashSet<Particle>();
     }
     
     public  double getDistanceTo(Particle p) {
@@ -107,6 +107,16 @@ public class Particle {
 
         return id == particle.id;
     }
+    
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+	@Override
+	public int compareTo(Particle p) {
+		return this.id - p.getId();
+	}
 
 
 }
