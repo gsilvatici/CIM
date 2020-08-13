@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CommandOptions
 {
     private int MSize;
-    private float rc;
+    private double rc;
     private boolean pc = false;
     private boolean bruteForce = false;
     private String staticPFile;
@@ -101,7 +101,7 @@ public class CommandOptions
 		return this.MSize;
 	}
 
-	public float getRc() {
+	public double getRc() {
 		// TODO Auto-generated method stub
 		return this.rc;
 	}

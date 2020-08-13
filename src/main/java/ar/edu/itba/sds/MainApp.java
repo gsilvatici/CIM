@@ -15,16 +15,25 @@ public class MainApp {
 		
 	    CommandOptions cmd = new CommandOptions(args);
 	    cmd.parseOptions();
+	    
+    	if (!cmd.hasOption("sf")){
+            System.out.println("Static file file not specified!");
+            System.exit(1);
+        }
+    	if (!cmd.hasOption("df") ) {
+            System.out.println("Dynamic file file not specified!");
+            System.exit(1);
+    	}
+    	
 	    try {
 	    	particles = fp.getParticles(cmd.getStaticFile(), cmd.getDinamycFile());
             
-	    	if (!cmd.hasOption("df") || !cmd.hasOption("sf")){
-                System.out.println("You must specify a static file and a dynamic file!");
-                System.exit(1);
-            }
+
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}
+	    
+	   
 	    
 	    CellIndexMethod cellIndexMethod = new CellIndexMethod(cmd.getM(), fp.getL(), cmd.getRc(), cmd.getPc(), particles);
 	    
@@ -35,6 +44,14 @@ public class MainApp {
         long end = System.currentTimeMillis();
 
         System.out.println("Compute time: " + (end - start) + "ms");	
+        
+        for (Particle p : particles){
+            System.out.print("Particle " + p + " neighbours: ");
+            for (Particle neighbour : p.getNeighbours()){
+                System.out.print(" " + neighbour);
+            }
+            System.out.println();
+        }
 	}
 	
 }

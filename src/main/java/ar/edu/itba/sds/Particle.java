@@ -2,26 +2,28 @@ package main.java.ar.edu.itba.sds;
 
 import java.util.HashSet;
 import java.util.Set;
+
 public class Particle implements Comparable<Particle> {
 	
-    private float x;
-    private float y;
-    private float radius;
-    private float property;
+    private double x;
+    private double y;
+    private double radius;
+    private double property;
 
     private int xIndex;
     private int yIndex;
 	private int id;
 	private Set<Particle> neighbours;
 
-    public Particle(int id, float x, float y, float radius, float property) {
+    public Particle(int id, double x, double y, double radius, double property) {
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.property = property;
+        this.neighbours = new HashSet<Particle>();
     }
     
-    Particle(int id, float radius, float property) {
+    Particle(int id, double radius, double property) {
         this.id = id;
         this.radius = radius;
         this.property = property;
@@ -35,42 +37,42 @@ public class Particle implements Comparable<Particle> {
     
     public double getPeriodicDistanceTo(Particle p, int L) {
 
-        double dx = Math.abs(this.x - p.x);
-        if (dx > L / 2)
-            dx = L - dx;
+        double deltaX = Math.abs(this.x - p.x);
+        if (deltaX > L / 2)
+        	deltaX = L - deltaX;
 
-        double dy = Math.abs(this.y - p.y);
-        if (dy > L / 2)
-            dy = L - dy;
+        double deltaY = Math.abs(this.y - p.y);
+        if (deltaY > L / 2)
+        	deltaY = L - deltaY;
 
-        return Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2));
+        return Math.sqrt(Math.pow(deltaX,2) + Math.pow(deltaY,2));
     }
     
     public void addNeighbour(Particle neighbour) {
         this.neighbours.add(neighbour);
     }
     
-    public float getRadius() {
+    public double getRadius() {
         return radius;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public float getProperty() {
-        return property;
+    public double getProperty() {
+        return this.property;
     }
 
-    public void setX(float x){
+    public void setX(double x){
         this.x = x;
     }
 
-    public void setY(float y){
+    public void setY(double y){
         this.y = y;
     }
 
@@ -82,7 +84,7 @@ public class Particle implements Comparable<Particle> {
         return yIndex;
     }
 
-    public void setyXYndex(int xIndex) {
+    public void setXIndex(int xIndex) {
         this.xIndex = xIndex;
     }
 
@@ -92,6 +94,10 @@ public class Particle implements Comparable<Particle> {
 
 	public int getId() {
 		return this.id;
+	}
+	
+	public Set<Particle> getNeighbours() {
+		return this.neighbours;
 	}
 	
     @Override
@@ -118,5 +124,11 @@ public class Particle implements Comparable<Particle> {
 		return this.id - p.getId();
 	}
 
+	@Override
+	public String toString () {
+		String ret = " " + this.id;
+//		ret += this.id;
+		return ret;
+	}
 
 }

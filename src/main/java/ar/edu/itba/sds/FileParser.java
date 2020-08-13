@@ -43,15 +43,12 @@ public class FileParser {
         for (int i = 0; i < particleCount; i++) {
         	double x = sc.nextDouble();
         	double y = sc.nextDouble();
-//        	double vx = sc.nextDouble(); 
-//        	double vy = sc.nextDouble(); 
-            Particle particle = particles.getFirst();
-//            particle.setX(x);
-//            particle.setY(y);
+            Particle particle = particles.poll();
+            particle.setX(x);
+            particle.setY(y);
             particles.add(particle);
         } 	
-    	
-    	        
+              
 		return particles;
        
 	}
