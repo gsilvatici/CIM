@@ -16,13 +16,19 @@ def static_file_maker(name, num_particles, length, radius, prop):
     static_file.write(str(radius) + ' ' + str(prop) + '\n')
   return
 
-def generate_all_files(matrix_size, length, radius, prop):
-  for i in range(1, 11):
-    static_file_maker('Static' + str(i*10), i*10, length, radius, prop)
-    static_file_maker('Static' + str(i*100), i*100, length, radius, prop)
-    dynamic_file_maker('Dynamic' + str(i*10), i*10, matrix_size*length)
-    dynamic_file_maker('Dynamic' + str(i*100), i*100, matrix_size*length)
+def generate_all_files(length, particles, radius, prop):
+  static_file_maker('Static' + str(particles), particles, length, radius, prop)
+  dynamic_file_maker('Dynamic' + str(particles), particles, length)
   return
 
-
-generate_all_files(20, 20, 1, 0)
+length = raw_input("Insert matrix length:\n")
+try:
+  length_int = int(length)
+  num_particles = raw_input("Insert number of particles:\n")
+  try:
+    part_int = int(num_particles)
+    generate_all_files(length_int, part_int, 1, 0)
+  except ValueError:
+    print("Invalid input")
+except ValueError:
+    print("Invalid input")
