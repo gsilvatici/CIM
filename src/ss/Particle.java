@@ -1,4 +1,4 @@
-package main.java.ar.edu.itba.sds;
+package ss;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,14 +8,14 @@ public class Particle implements Comparable<Particle> {
     private double x;
     private double y;
     private double radius;
-    private double property;
+    private int property;
 
     private int xIndex;
     private int yIndex;
 	private int id;
 	private Set<Particle> neighbours;
 
-    public Particle(int id, double x, double y, double radius, double property) {
+    public Particle(int id, double x, double y, double radius, int property) {
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -23,7 +23,7 @@ public class Particle implements Comparable<Particle> {
         this.neighbours = new HashSet<Particle>();
     }
     
-    Particle(int id, double radius, double property) {
+    Particle(int id, double radius, int property) {
         this.id = id;
         this.radius = radius;
         this.property = property;
@@ -129,6 +129,15 @@ public class Particle implements Comparable<Particle> {
 		String ret = " " + this.id;
 //		ret += this.id;
 		return ret;
+	}
+
+	public int getColor() {
+		return this.property;
+	}
+
+	public void setColor(int color) {
+		this.property = color;
+		
 	}
 
 }

@@ -1,13 +1,14 @@
-package main.java.ar.edu.itba.sds;
+package ss;
 
 import java.util.ArrayList;
 
 public class CommandOptions
 {
     private int MSize;
+    private int paticleId;
     private double rc;
     private boolean pc = false;
-    private boolean bruteForce = false;
+    private boolean bf = false;
     private String staticPFile;
     private String dynamicPFile;
 	
@@ -57,30 +58,35 @@ public class CommandOptions
 
         try {
 
-            dynamicPFile = valueOf("df");
-            staticPFile = valueOf("sf");
+            dynamicPFile = valueOf("-df");
+            staticPFile = valueOf("-sf");
        
-            if (hasOption("M")) {
-                MSize = Integer.parseInt(valueOf("M"));
-                System.out.println(valueOf("M"));
+            if (hasOption("-M")) {
+                MSize = Integer.parseInt(valueOf("-M"));
             } else {
-            	MSize = 10;
+            	MSize = 5;
             }
             
-            if (hasOption("rc")) {
-            	rc = Float.parseFloat(valueOf("rc"));
+            if (hasOption("-rc")) {
+            	rc = Float.parseFloat(valueOf("-rc"));
             } else {
             	rc = 1;
             }
             
-            if (hasOption("pc")) {
+            if (hasOption("-pc")) {
             	pc = true;
             } else {
             	pc = false;
             }
+            
+            if(hasOption("-pick")) {
+            	paticleId = Integer.parseInt(valueOf("-pick")); 
+            } else {
+            	paticleId = 90;
+            }
 
-            if(hasOption("bf")) {
-                bruteForce = true;
+            if(hasOption("-bf")) {
+                bf = true;
             }
 
 
@@ -102,7 +108,6 @@ public class CommandOptions
 	}
 
 	public double getRc() {
-		// TODO Auto-generated method stub
 		return this.rc;
 	}
 
@@ -110,4 +115,7 @@ public class CommandOptions
 		return this.pc;
 	}
     
+	public int getParticle() {
+		return this.paticleId;
+	}
 }
