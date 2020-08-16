@@ -32,4 +32,4 @@ def M_compare(filename):
   return
 
 
-M_compare("../bin/m_compare500.txt")
+M_compare("../bin/m_compare200.txt")

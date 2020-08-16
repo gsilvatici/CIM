@@ -16,6 +16,8 @@ public class MainApp {
 		
 		List<Particle> particles = null;
 		FileParser fp = new FileParser();
+		double start;
+		double end;
 		
 	    CommandOptions cmd = new CommandOptions(args);
 	    cmd.parseOptions();
@@ -35,62 +37,62 @@ public class MainApp {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}
-	    try (Writer writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream("m_compare" + String.valueOf(fp.getN()) + ".txt"), "utf-8"))) {
+//	    try (Writer writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream("m_compare" + String.valueOf(fp.getN()) + ".txt"), "utf-8"))) {
     	
-	    	writer.write(String.valueOf(fp.getN()) + "\n");
+//	    	writer.write(String.valueOf(fp.getN()) + "\n");
 		    
-		    for (int i = 1; i < 11; i++) {  
+//		    for (int i = 1; i < 20; i++) {  
 		    	
-			    CellIndexMethod cellIndexMethod = new CellIndexMethod(i*5, fp.getL(), cmd.getRc(), cmd.getPc(), cmd.getParticle(), particles);
+			    CellIndexMethod cellIndexMethod = new CellIndexMethod(cmd.getM(), fp.getL(), cmd.getRc(), cmd.getPc(), cmd.getParticle(), particles);
 			    
-			    double start = (double)(System.nanoTime())/(double)(1000000);
+			    start = (double)(System.nanoTime())/(double)(1000000);
 				
 			    cellIndexMethod.Compute();
 			    
-			    double end = (double)(System.nanoTime())/(double)(1000000);
+			    end = (double)(System.nanoTime())/(double)(1000000);
 			    
 			    double deltaTime = end - start;
 			    
-			    writer.write(String.valueOf(i*5) + "\t" + String.valueOf(deltaTime) + "\n");
+//			    writer.write(String.valueOf(i) + "\t" + String.valueOf(deltaTime) + "\n");
 		
 		        System.out.println("Cell index method compute time: " + deltaTime + "ms");	
 	    	
-		    }
-	    }
+//		    }
+//	    }
 
-//        try (Writer writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream("output.txt"), "utf-8"))) {
-//        	
-//        	writer.write(String.valueOf(fp.getN()) + "\n" + "\n");
-//        	
-//            for (Particle p : particles){
-//            	writer.write(String.valueOf(p.getId()) + "\t" 
-//            				+ String.valueOf(p.getX()) + "\t"
-//            				+ String.valueOf(p.getY()) + "\t" 
-//            				+ String.valueOf(p.getRadius()) + "\t"
-//            				+ String.valueOf(p.getColor()) + "\n");
-//                System.out.print("Particle " + p + " neighbours: ");
-//                for (Particle neighbour : p.getNeighbours()){
-//                    System.out.print(" " + neighbour);
-//                   
-//                }
-//                
-//                System.out.println();
-//                
-//            }
-//            
-//        }
-//        
-//        for (Particle p: particles) {
-//        	p.getNeighbours().clear();
-//        }        
-//        
-//		start = System.currentTimeMillis();
-//		
-//		computeBruteForce(fp.getL(), cmd.getRc(), cmd.getPc(), particles);
-//	    
-//        end = System.currentTimeMillis();
-//
-//        System.out.println("Brute force compute time: " + (end - start) + "ms");	
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream("output.txt"), "utf-8"))) {
+        	
+        	writer.write(String.valueOf(fp.getN()) + "\n" + "\n");
+        	
+            for (Particle p : particles){
+            	writer.write(String.valueOf(p.getId()) + "\t" 
+            				+ String.valueOf(p.getX()) + "\t"
+            				+ String.valueOf(p.getY()) + "\t" 
+            				+ String.valueOf(p.getRadius()) + "\t"
+            				+ String.valueOf(p.getColor()) + "\n");
+                System.out.print("Particle " + p + " neighbours: ");
+                for (Particle neighbour : p.getNeighbours()){
+                    System.out.print(" " + neighbour);
+                   
+                }
+                
+                System.out.println();
+                
+            }
+            
+        }
+        
+        for (Particle p: particles) {
+        	p.getNeighbours().clear();
+        }        
+        
+        start = System.currentTimeMillis();
+		
+		computeBruteForce(fp.getL(), cmd.getRc(), cmd.getPc(), particles);
+	    
+		end = System.currentTimeMillis();
+
+        System.out.println("Brute force compute time: " + (end - start) + "ms");	
         
 	}
 	

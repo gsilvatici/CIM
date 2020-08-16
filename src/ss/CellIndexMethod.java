@@ -6,8 +6,8 @@ import java.util.List;
 
 public class CellIndexMethod {
 	
-	private int M;
-	private int L;
+	private double M;
+	private double L;
 	private int pick;
 	private double rc;
 	private boolean pc;
@@ -15,7 +15,7 @@ public class CellIndexMethod {
 	List<Particle>[][] heads; 
 	
 	@SuppressWarnings("unchecked")
-	public CellIndexMethod (int M, int L, double rc, boolean pc, int pick, List<Particle> particles) {
+	public CellIndexMethod (double M, double L, double rc, boolean pc, int pick, List<Particle> particles) {
 		this.M = M;
 		this.L = L;
 		this.rc = rc;
@@ -23,7 +23,7 @@ public class CellIndexMethod {
 		this.particles = particles;
 		this.pick = pick;
 		
-		heads = new LinkedList[M][M]; 
+		heads = new LinkedList[(int)M][(int)M]; 
     	
         for (int i = 0; i < M ; i++) {
             for (int j = 0; j < M ; j++) {
@@ -36,8 +36,8 @@ public class CellIndexMethod {
     public void Compute() {
 
         for (Particle p : particles){
-            int i = (int) (p.getY()/((double)L/(double)M));
-            int j = (int) (p.getX()/((double)L/(double)M));
+            int i = (int) ((double)p.getY()/((double)L/(double)M));
+            int j = (int) ((double)p.getX()/((double)L/(double)M));
             List<Particle> currentHead = heads[i][j];
             p.setYIndex(i);
             p.setXIndex(j);
@@ -55,22 +55,7 @@ public class CellIndexMethod {
             checkNeighbourCell(p, xCell, yCell + 1);
             checkNeighbourCell(p, xCell + 1, yCell - 1);	
         }
-        
-//        for (int i = 0; i < M ; i++) {
-//            for (int j = 0; j < M ; j++) {
-//	            for (Particle p : heads[i][j]){
-//	                int xCell = p.getXIndex();
-//	                int yCell = p.getYIndex();
-//	                
-//	                checkNeighbourCell(p, xCell, yCell);
-//	                checkNeighbourCell(p, xCell + 1, yCell);
-//	                checkNeighbourCell(p, xCell + 1, yCell + 1);
-//	                checkNeighbourCell(p, xCell, yCell + 1);
-//	                checkNeighbourCell(p, xCell + 1, yCell - 1);	              
-//	                
-//	            }     		                
-//            }
-//        }
+
     }
     
     
@@ -81,13 +66,13 @@ public class CellIndexMethod {
             	xCell = 0;
             }         
             if (xCell < 0){
-            	xCell = M - 1;
+            	xCell = (int)M - 1;
             }            
             if (yCell >= M){
             	yCell = 0;
             }
             if (yCell < 0){
-            	yCell = M - 1;
+            	yCell = (int)M - 1;
             }
         } else {
             if (xCell >= M || xCell < 0 || yCell >= M || yCell < 0) {
@@ -102,7 +87,7 @@ public class CellIndexMethod {
                  double distance;
 
                 if (pc) {
-                    distance = particle.getPeriodicDistanceTo(neighbourCellParticle, L);
+                    distance = particle.getPeriodicDistanceTo(neighbourCellParticle, (int)L);
                 } else{
                     distance = particle.getDistanceTo(neighbourCellParticle);
                 }

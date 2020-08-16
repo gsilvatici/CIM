@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CommandOptions
 {
-    private int MSize;
+    private double MSize;
     private int paticleId;
     private double rc;
     private boolean pc = false;
@@ -103,7 +103,7 @@ public class CommandOptions
     	return this.dynamicPFile;
     }
 
-	public int getM() {
+	public double getM() {
 		return this.MSize;
 	}
 
