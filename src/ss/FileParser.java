@@ -1,4 +1,4 @@
-package main.java.ar.edu.itba.sds;
+package ss;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,13 +30,12 @@ public class FileParser {
         particleCount = sc.nextInt();
         lengthSize = sc.nextInt();
         for (int i = 0; i < particleCount; i++) {
-            float radius   = sc.nextFloat();
-            float property = sc.nextFloat();
-            particles.add(new Particle(i, radius, property));
+            double radius   = sc.nextDouble();
+            double property = sc.nextDouble();
+            particles.add(new Particle(i, radius, (int)property));
         }    
         
         // parse dynamic file
-        System.out.println(dynamicFilePath);
         fis = new FileInputStream(dynamicFilePath);  
         sc = new Scanner(fis);
         sc.nextInt();
@@ -55,5 +54,9 @@ public class FileParser {
 
 	public int getL() {
 		return lengthSize;
+	}
+	
+	public int getN() {
+		return particleCount;
 	}
 }
